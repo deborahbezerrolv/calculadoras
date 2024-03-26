@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel de Carro</title>
+
+</head>
+<body>
+
+<h2>Painel de Carro</h2>
+
+<button onclick="abastecer()">Abastecer</button>
+<button onclick="acelerar()">Acelerar</button>
+<button onclick="frear()">Freiar</button>
+<button onclick="trocarMarcha()">Trocar de Marcha</button>
+
+<p>Status: <span id="status">Desligado</span></p>
+
+<script>
+
+var carro = {
+    combustivel: 50, 
+    velocidade: 0, 
+    marcha: 0, 
+    ligado: false 
+};
+
+
+function abastecer() {
+    if (!carro.ligado) {
+        carro.combustivel = 100;
+        updateStatus("Carro abastecido.");
+    } else {
+        updateStatus("Desligue o carro antes de abastecer.");
+    }
+}
+
+
+function ligarDesligar() {
+    carro.ligado = !carro.ligado;
+    if (carro.ligado) {
+        updateStatus("Carro ligado.");
+    } else {
+        updateStatus("Carro desligado.");
+    }
+}
+
+
+function acelerar() {
+    if (carro.ligado && carro.combustivel > 0) {
+        carro.velocidade += 10;
+        carro.combustivel -= 5;
+        updateStatus("Acelerando. Velocidade: " + carro.velocidade + " km/h");
+    } else if (carro.ligado && carro.combustivel === 0) {
+        updateStatus("Sem combustível. Abasteça o carro.");
+    } else {
+        updateStatus("Ligue o carro antes de acelerar.");
+    }
+}
+
+
+function frear() {
+    if (carro.ligado && carro.velocidade > 0) {
+        carro.velocidade -= 10;
+        updateStatus("Freando. Velocidade: " + carro.velocidade + " km/h");
+    } else if (carro.ligado && carro.velocidade === 0) {
+        updateStatus("O carro já está parado.");
+    } else {
+        updateStatus("Ligue o carro antes de frear.");
+    }
+}
+
+function trocarMarcha() {
+    if (carro.ligado) {
+        if (carro.velocidade === 0) {
+            carro.marcha++;
+            updateStatus("Marcha trocada para " + carro.marcha);
+        } else {
+            updateStatus("Pare o carro antes de trocar de marcha.");
+        }
+    } else {
+        updateStatus("Ligue o carro antes de trocar de marcha.");
+    }
+}
+
+
+function updateStatus(message) {
+    document.getElementById("status").textContent = message;
+}
+</script>
+
+</body>
+</html>

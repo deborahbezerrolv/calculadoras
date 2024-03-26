@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Contas Domésticas</title>
+</head>
+<body>
+
+<h2>Calculadora de Contas Domésticas</h2>
+
+<label for="luz">Consumo de Luz (em kWh):</label>
+<input type="number" id="luz"><br><br>
+
+<label for="agua">Consumo de Água (em m³):</label>
+<input type="number" id="agua"><br><br>
+
+<label for="gas">Consumo de Gás (em m³):</label>
+<input type="number" id="gas"><br><br>
+
+<button onclick="calcular()">Calcular</button>
+
+<p>Total a pagar:</p>
+<div id="resultado"></div>
+
+<script>
+function calcular() {
+    var consumoLuz = parseFloat(document.getElementById("luz").value);
+    var consumoAgua = parseFloat(document.getElementById("agua").value);
+    var consumoGas = parseFloat(document.getElementById("gas").value);
+
+    var precoLuz = 0.5; 
+    var precoAgua = 3; 
+    var precoGas = 2; 
+
+    var totalLuz = consumoLuz * precoLuz;
+    var totalAgua = consumoAgua * precoAgua;
+    var totalGas = consumoGas * precoGas;
+
+    var totalPagar = totalLuz + totalAgua + totalGas;
+    var resultadoElement = document.getElementById("resultado");
+    resultadoElement.innerHTML = "Total de Luz: R$ " + totalLuz.toFixed(2) + "<br>" +
+                                  "Total de Água: R$ " + totalAgua.toFixed(2) + "<br>" +
+                                  "Total de Gás: R$ " + totalGas.toFixed(2) + "<br>" +
+                                  "<strong>Total a Pagar: R$ " + totalPagar.toFixed(2) + "</strong>";
+}
+</script>
+
+</body>
+</html>
